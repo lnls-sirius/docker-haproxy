@@ -1,0 +1,13 @@
+[Unit]
+Description=LNLS Controls Group HAProxy service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/docker-compose -f /etc/systemd/system/lnls-haproxy.d/docker-compose.yml up -d
+ExecStop=/usr/local/bin/docker-compose -f /etc/systemd/system/lnls-haproxy.d/docker-compose.yml down
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

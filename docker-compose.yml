@@ -1,0 +1,12 @@
+version: '2'
+services:
+    con-haproxy:
+        container_name: lnls-haproxy
+        image: lnlscon/haproxy:latest
+        ports:
+            - "443:443"
+            - "8080:8080"
+            - "80:80"
+        dns:
+            - 10.0.0.71
+            - 10.0.0.72
