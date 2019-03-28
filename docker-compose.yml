@@ -13,3 +13,9 @@ services:
         volumes:
             - /etc/systemd/system/lnls-haproxy.service.d/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
             - /etc/systemd/system/lnls-haproxy.service.d/haproxy.pem:/etc/ssl/haproxy.pem
+        logging:
+            driver: "json-file"
+            options:
+                max-file: "4"
+                max-size: "250m"
+        
