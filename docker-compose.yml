@@ -17,8 +17,8 @@ services:
       - 10.0.0.71
       - 10.0.0.72
     volumes:
-      - /home/con-srv/LA-disk0/repository/docker-haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /etc/systemd/system/lnls-haproxy.service.d/haproxy.pem:/etc/ssl/haproxy.pem
+      - /storage/services/repository/docker-stacks/cons-haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - /storage/services/repository/docker-stacks/cons-haproxy/haproxy.pem:/etc/ssl/haproxy.pem
     logging:
       driver: "json-file"
       options:
