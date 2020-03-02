@@ -11,6 +11,7 @@ services:
       - target: 80
         published: 80
         protocol: tcp
+        mode: host
     dns_search:
       - abtlus.org.br
     dns:
