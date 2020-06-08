@@ -2,7 +2,7 @@ version: '3.3'
 services:
   con-haproxy:
     container_name: lnls-haproxy
-    image: haproxy:2.0.12
+    image: haproxy:2.1.4
     ports:
       - target: 443
         published: 443
