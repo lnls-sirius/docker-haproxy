@@ -1,4 +1,6 @@
 # HAProxy Docker Image
+In order to use version 2.2+ we must replace `reqrep` with `http-request replace-path`.
+[HAProxy Community Docs v2.2](https://cbonte.github.io/haproxy-dconv/2.2/configuration.html)
 
 ## Running 
 
