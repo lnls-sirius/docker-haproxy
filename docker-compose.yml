@@ -1,7 +1,7 @@
 version: '3.3'
 services:
-  con-haproxy:
-    container_name: lnls-haproxy
+  haproxy:
+    #image: haproxy:2.2.8 # We need to update the settings in order to update to the current LTS
     image: haproxy:2.0.12
     ports:
       - target: 443
@@ -18,8 +18,8 @@ services:
       - 10.0.0.71
       - 10.0.0.72
     volumes:
-      - /storage/services/repository/docker-stacks/cons-haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /storage/services/repository/docker-stacks/cons-haproxy/haproxy.pem:/etc/ssl/haproxy.pem
+      - /storage/services/repository/docker-stacks/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - /storage/services/repository/docker-stacks/haproxy/haproxy.pem:/etc/ssl/haproxy.pem
     logging:
       driver: "json-file"
       options:
@@ -27,3 +27,13 @@ services:
         max-size: "250m"
     deploy:
       mode: global
+      placement:
+        constraints:
+          - node.hostname != CA-RaTim-CO-IOCSrv
+          - node.hostname != IA-14RaDiag03-CO-IOCSrv
+          - node.hostname != IA-16RaBbB-CO-IOCSrv
+          - node.hostname != IA-18RaDiag04-CO-IOCSrv
+          - node.hostname != IA-20RaDiag01-CO-IOCSrv-1
+          - node.hostname != IA-20RaDiag01-CO-IOCSrv-2
+          - node.hostname != IA-20RaDiag02-CO-IOCSrv-1
+          - node.hostname != IA-20RaDiag02-CO-IOCSrv-2
