@@ -18,7 +18,7 @@ services:
       - 10.0.0.72
     volumes:
       - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /storage/services/repository/docker-stacks/Haproxy/haproxy.pem:/etc/ssl/haproxy.pem
+      - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem
     logging:
       driver: "json-file"
       options:
