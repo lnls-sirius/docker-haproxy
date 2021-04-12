@@ -2,15 +2,6 @@ version: '3.3'
 services:
   haproxy:
     image: 'dockerregistry.lnls-sirius.com.br/haproxy:2.0.12'
-    ports:
-      - target: 443
-        published: 443
-        protocol: tcp
-        mode: host
-      - target: 80
-        published: 80
-        protocol: tcp
-        mode: host
     dns_search:
       - abtlus.org.br
     dns:
@@ -19,6 +10,8 @@ services:
     volumes:
       - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
       - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem
+    networks:
+      - host_network
     logging:
       driver: "json-file"
       options:
@@ -36,3 +29,8 @@ services:
           - node.hostname != IA-20RaDiag01-CO-IOCSrv-2
           - node.hostname != IA-20RaDiag02-CO-IOCSrv-1
           - node.hostname != IA-20RaDiag02-CO-IOCSrv-2
+
+networks:
+  host_network:
+    external:
+      name: "host"
