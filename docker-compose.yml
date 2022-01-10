@@ -1,72 +1,54 @@
 version: '3.3'
+
+x-defaults: &defaults
+  image: dockerregistry.lnls-sirius.com.br/haproxy:2.2
+  dns:
+    - 10.0.0.71
+    - 10.0.0.72
+  dns_search:
+      - abtlus.org.br
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "4"
+      max-size: "250m"
+  networks:
+    - host_network
+
+networks:
+  host_network:
+    external:
+      name: "host"
+
 services:
   ta:
-    image: dockerregistry.lnls-sirius.com.br/haproxy:2.2
-    dns_search:
-      - abtlus.org.br
-    dns:
-      - 10.0.0.71
-      - 10.0.0.72
+    <<: *defaults
     volumes:
       - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
       - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem
-    networks:
-      - host_network
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "4"
-        max-size: "250m"
     deploy:
       replicas: 1
       placement:
         constraints:
           - node.hostname == TA-TiRack-CO-FWSrv-1
   ca:
-    image: dockerregistry.lnls-sirius.com.br/haproxy:2.2
-    dns_search:
-      - abtlus.org.br
-    dns:
-      - 10.0.0.71
-      - 10.0.0.72
+    <<: *defaults
     volumes:
       - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
       - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem
-    networks:
-      - host_network
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "4"
-        max-size: "250m"
     deploy:
       replicas: 1
       placement:
         constraints:
           - node.hostname == CA-RaCtrl-CO-Srv-1
   la:
+    <<: *defaults
     image: dockerregistry.lnls-sirius.com.br/haproxy:2.2
-    dns_search:
-      - abtlus.org.br
-    dns:
-      - 10.0.0.71
-      - 10.0.0.72
     volumes:
       - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
       - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem
-    networks:
-      - host_network
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "4"
-        max-size: "250m"
     deploy:
       replicas: 1
       placement:
         constraints:
           - node.hostname == LA-RaCtrl-CO-Srv-1
-networks:
-  host_network:
-    external:
-      name: "host"
