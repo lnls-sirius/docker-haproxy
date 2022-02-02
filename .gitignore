@@ -1,3 +1,4 @@
-ssl/cert.pem
-ssl/haproxy.pem
-ssl/key.pem
+**/*.pem
+**/*.crt
+**/*.key
+**/*.pfx
