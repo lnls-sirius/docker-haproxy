@@ -17,15 +17,15 @@ x-defaults: &defaults
 
 networks:
   host_network:
-    external:
-      name: "host"
+    external: true
+    name: "host"
 
 services:
   ta:
     <<: *defaults
     volumes:
-      - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /storage/services/repository/docker-stacks/Haproxy/ssl-ta/haproxy.pem:/etc/ssl/haproxy.pem
+      - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem:ro
     deploy:
       replicas: 1
       placement:
@@ -34,8 +34,8 @@ services:
   ca:
     <<: *defaults
     volumes:
-      - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /storage/services/repository/docker-stacks/Haproxy/ssl-ca/haproxy.pem:/etc/ssl/haproxy.pem
+      - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem:ro
     deploy:
       replicas: 1
       placement:
@@ -45,8 +45,8 @@ services:
     <<: *defaults
     image: dockerregistry.lnls-sirius.com.br/haproxy:2.2
     volumes:
-      - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /storage/services/repository/docker-stacks/Haproxy/ssl-la/haproxy.pem:/etc/ssl/haproxy.pem
+      - /storage/services/repository/docker-stacks/Haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - /storage/services/repository/docker-stacks/Haproxy/ssl/haproxy.pem:/etc/ssl/haproxy.pem:ro
     deploy:
       replicas: 1
       placement:
